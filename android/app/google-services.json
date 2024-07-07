@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "973363788053",
+    "project_id": "gr8fit-b-fetch",
+    "storage_bucket": "gr8fit-b-fetch.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:973363788053:android:0ece61ab5cc3ae55ff911c",
+        "android_client_info": {
+          "package_name": "com.davidoluseun.gr8fitbfetch"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXf2I23TlOLc-9BT3wwHtoFe8iI7ooyLU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
