@@ -15,6 +15,8 @@ This app doesn't support Expo Go
 
 ```
 
+## Running the app
+
 ```bash
 # Running Development Build
 
