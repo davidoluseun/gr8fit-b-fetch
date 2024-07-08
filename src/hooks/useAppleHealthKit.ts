@@ -1,14 +1,11 @@
 import * as React from 'react';
-import AppleHealthKit, {
-  HealthValue,
-  HealthKitPermissions,
-} from 'react-native-health';
-import auth from '@react-native-firebase/auth';
-import db from '@react-native-firebase/database';
+import AppleHealthKit, { HealthKitPermissions } from 'react-native-health';
+
+import getHealthData from '../utils/getHealthData';
 
 export default function useAppleHealthKit() {
-  const { currentUser } = auth();
-  const ref = `/users/${currentUser?.uid}`;
+  const [healthOptions, setHealthOptions] =
+    React.useState<HealthKitPermissions | null>(null);
 
   React.useEffect(() => {
     const healthKitOptions = {
@@ -21,37 +18,10 @@ export default function useAppleHealthKit() {
       },
     } as HealthKitPermissions;
 
-    const options = {
-      startDate: new Date(2024, 5, 1).toISOString(),
-    };
+    getHealthData(healthKitOptions);
 
-    AppleHealthKit.initHealthKit(healthKitOptions, (err, results) => {
-      if (err) return;
-
-      AppleHealthKit.getStepCount(options, (err, result) => {
-        if (err) return;
-
-        if (currentUser) db().ref(ref).update({ steps: result.value });
-      });
-
-      AppleHealthKit.getDistanceWalkingRunning(options, (err, result) => {
-        if (err) return;
-
-        if (currentUser) db().ref(ref).update({ distance: result.value });
-      });
-
-      AppleHealthKit.getActiveEnergyBurned(options, (err, results) => {
-        if (err) return;
-        if (currentUser) {
-          const cummulator = (sum: number, entry: HealthValue) =>
-            sum + entry.value;
-          const totalValue = results.reduce(cummulator, 0);
-
-          db().ref(ref).update({ calories: totalValue });
-        }
-      });
-    });
+    setHealthOptions(healthKitOptions);
   }, []);
 
-  return;
+  return healthOptions;
 }

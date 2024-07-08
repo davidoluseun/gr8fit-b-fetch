@@ -16,7 +16,8 @@
       "googleServicesFile": "./GoogleService-Info.plist",
       "bundleIdentifier": "com.davidoluseun.gr8fitbfetch",
       "infoPlist": {
-        "NSLocationWhenInUseUsageDescription": "This app uses your location to show your current position."
+        "NSLocationWhenInUseUsageDescription": "This app uses your location to show your current position.",
+        "UIBackgroundModes": ["location", "fetch", "remote-notification"]
       }
     },
     "android": {
@@ -39,14 +40,8 @@
     "plugins": [
       "expo-build-properties",
       "@react-native-firebase/app",
-      [
-        "expo-background-fetch",
-        {}
-      ],
-      [
-        "expo-task-manager",
-        {}
-      ],
+      ["expo-background-fetch", {}],
+      ["expo-task-manager", {}],
       [
         "expo-location",
         {

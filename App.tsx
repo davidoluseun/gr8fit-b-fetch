@@ -6,15 +6,32 @@ import { Login } from './src/screens/Login';
 import { Register } from './src/screens/Register';
 import { LoadingScreen } from './src/screens/Loading';
 import { AppNavigator } from './src/navigation/AppNavigator';
-
 import useLocation from './src/hooks/useLocation';
 import useAppleHealthKit from './src/hooks/useAppleHealthKit';
+import {
+  registerBackgroundFetchAsync,
+  unregisterBackgroundFetchAsync,
+} from './src/utils/taskManager';
+import useTask from './src/hooks/useBackgroundTask';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
 
   useLocation();
-  useAppleHealthKit();
+  const healthOptions = useAppleHealthKit();
+  useTask(healthOptions);
+
+  React.useEffect(() => {
+    registerBackgroundFetchAsync()
+      .then(() => {})
+      .catch((err) => {});
+
+    return () => {
+      unregisterBackgroundFetchAsync()
+        .then(() => {})
+        .catch((err) => {});
+    };
+  }, []);
 
   return (
     <NavigationContainer>

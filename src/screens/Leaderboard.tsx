@@ -4,8 +4,6 @@ import { StatusBar } from 'expo-status-bar';
 
 import db from '@react-native-firebase/database';
 
-import { CTAButton } from '../components/Button';
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -78,14 +76,6 @@ export const Leaderboard = () => {
     <View style={styles.container}>
       <StatusBar backgroundColor='purple' />
 
-      <CTAButton
-        title='Login'
-        loading={true}
-        disabled={true}
-        onPress={() => {
-          console.log('press');
-        }}
-      />
       <FlatList
         data={leaderBoard}
         showsVerticalScrollIndicator={false}
